@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const app = express();
 const logger = require('morgan');
@@ -7,7 +5,6 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
 require('dotenv').config();
-
 
 if (process.env.NODE_ENV !== 'test') {
   app.use(logger('dev'));
