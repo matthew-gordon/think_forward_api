@@ -59,6 +59,21 @@ describe('routes : auth', () => {
         done();
       });
     });
+    it('should not login an unregistered user', (done) => {
+      chai.request(server)
+      .post('/auth/login')
+      .send({
+        username: 'mr',
+        password: 'notRegistered'
+      })
+      .end((err, res) => {
+        should.exist(err);
+        res.status.should.eql(500);
+        res.type.should.eql('application/json');
+        res.body.status.should.eql('error');
+        done();
+      });
+    });
   });
 
 });
