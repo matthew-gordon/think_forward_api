@@ -9,10 +9,17 @@ function users() {
 // *** queries *** //
 
 function addUser(user) {
-  return users().insert(user);
+  return users().insert(user, 'id');
 }
 
+function getSingleUser(userID) {
+  return users()
+  .where('id', parseInt(userID))
+  .first()
+  .select(['username', 'image', 'bio', 'email']);
+}
 
 module.exports = {
-  addUser
+  addUser,
+  getSingleUser
 }

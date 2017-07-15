@@ -40,6 +40,19 @@ describe('routes : auth', () => {
         done();
       });
     });
+    it('should throw an error if username exists', (done) => {
+      chai.request(server)
+      .post('/auth/register')
+      .send({
+        username: 'matt',
+        password: 'password123'
+      })
+      .end((err, res) => {
+        should.exist(err);
+        err.should.have.status(500);
+        done();
+      });
+    });
   });
 
   describe('POST /auth/login', () => {
@@ -59,18 +72,19 @@ describe('routes : auth', () => {
         done();
       });
     });
-    it('should not login an unregistered user', (done) => {
+    it('should throw an error if password incorrect', (done) => {
       chai.request(server)
       .post('/auth/login')
       .send({
-        username: 'mr',
-        password: 'notRegistered'
+        username: 'matt',
+        password: 'password1234'
       })
       .end((err, res) => {
         should.exist(err);
         res.status.should.eql(500);
-        res.type.should.eql('application/json');
+        res.body.should.have.keys('status', 'message');
         res.body.status.should.eql('error');
+        res.body.message.should.eql('Invalid username/password');
         done();
       });
     });
@@ -81,8 +95,8 @@ describe('routes : auth', () => {
       chai.request(server)
       .post('/auth/login')
       .send({
-        username: 'jeremy',
-        password: 'johnson123'
+        username: 'matt',
+        password: 'password123'
       })
       .end((error, response) => {
         should.not.exist(error);

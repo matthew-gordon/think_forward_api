@@ -22,7 +22,7 @@ describe('auth : local', () => {
       token.should.be.a('string');
       localAuth.decodeToken(token, (err, res) => {
         should.not.exist(err);
-        res.sub.should.eql(1);
+        res.sub.id.should.eql(1);
       });
     });
   });

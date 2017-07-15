@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const authHelpers = require('../auth/_helpers');
 const localAuth = require('../auth/local');
-const queries = require('../db/queries');
 
 router.post('/register', (req, res, next)  => {
   return authHelpers.createUser(req)
@@ -45,6 +44,15 @@ router.post('/login', (req, res, next) => {
       status: 'error',
       message: 'Invalid username/password'
     });
+  });
+});
+
+router.get('/user',
+  authHelpers.ensureAuthenticated,
+  (req, res, next)  => {
+  res.status(200).json({
+    status: 'success',
+    data: res.user
   });
 });
 
