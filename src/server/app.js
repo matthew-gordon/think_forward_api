@@ -4,6 +4,8 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
+const auth = require('./routes/auth');
+
 require('dotenv').config();
 
 if (process.env.NODE_ENV !== 'test') {
@@ -21,6 +23,8 @@ const allowCrossDomain = (req, res, next) => {
 app.use(allowCrossDomain);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/auth', auth);
 
 // error handlers
 
