@@ -43,6 +43,7 @@ function ensureAuthenticated(req, res, next) {
       return queries.getSingleUser(payload.sub.id).first()
       .then((user) => {
         return res.status(200).json({
+          status: 'success',
           user: user
         });
       })
