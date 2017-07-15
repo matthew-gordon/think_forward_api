@@ -1,7 +1,7 @@
 'use strict';
 
 const bcrypt = require('bcryptjs');
-const queries = require('../db/queries');
+const queries = require('../db/queries/auth_queries');
 const knex = require('../db/knex');
 const localAuth = require('./local');
 

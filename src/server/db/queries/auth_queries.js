@@ -1,4 +1,4 @@
-const knex = require('./knex');
+const knex = require('../knex');
 
 // *** query helper *** //
 
@@ -6,7 +6,7 @@ function users() {
   return knex('users');
 }
 
-// *** queries *** //
+// *** auth queries *** //
 
 function addUser(user) {
   return users().insert(user, 'id');

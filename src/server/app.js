@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
 const auth = require('./routes/auth');
+const articles = require('./routes/articles');
 
 require('dotenv').config();
 
@@ -25,6 +26,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/auth', auth);
+app.use('/articles', articles);
+
+// app.use('*', (req, res, next) => {
+//   res.send('Hmmm... that doesn\'t seem to be here...');
+// });
 
 // error handlers
 
