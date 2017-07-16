@@ -28,8 +28,8 @@ describe('TAGS API routes', () => {
         res.type.should.eql('application/json');
         res.body.status.should.eql('success');
         res.body.tags[0].should.include.keys(
-          'article',
-          'tag'
+          'id',
+          'name'
         );
         done();
       });
