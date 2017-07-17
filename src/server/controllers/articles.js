@@ -39,10 +39,7 @@ async function bySlug(req, res, next) {
 }
 
 async function getOne(req, res, next) {
-  // console.log(req.params.article, '**** see this ***');
-  console.log(req.params, '***** THIS IS NOW!!! ****');
-  res.send(req.params.article);
-  // req.body.article = req.params.article;
+  res.status(200).send(req.params.article);
 }
 
 module.exports = {
