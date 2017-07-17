@@ -40,4 +40,27 @@ describe('ARTICLE API routes', () => {
     });
   });
 
+  describe('GET /articles/:id', () => {
+    it('should return a single article by id', (done) => {
+      chai.request(server)
+      .get('/articles/2')
+      .end((err, res) => {
+        should.not.exist(err);
+        res.redirects.length.should.eql(0);
+        res.status.should.eql(200);
+        res.type.should.eql('application/json');
+        res.body.status.should.eql('success');
+        res.body.article.should.include.keys(
+          'slug',
+          'title',
+          'body',
+          'description',
+          'favorites_count',
+          'author'
+        );
+        done();
+      });
+    });
+  });
+
 });

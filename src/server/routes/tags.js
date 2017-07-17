@@ -18,4 +18,18 @@ router.get('/', (req, res, next) => {
   });
 });
 
+// *** GET all tags for an article *** //
+router.get('/article/:id', (req, res, next) => {
+  return queries.getArticleTags(req.params.id)
+  .then((tags) => {
+    res.status(200).json({
+      status: 'success',
+      tags
+    });
+  })
+  .catch((err) => {
+    next(err)
+  });
+});
+
 module.exports = router;

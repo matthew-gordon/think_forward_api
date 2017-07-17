@@ -58,11 +58,11 @@ exports.up = function(knex, Promise) {
 
     .createTable('articles_tags', (table) => {
       table.increments();
-      table.integer('article').notNullable().references('articles.id')
+      table.integer('article_id').notNullable().references('articles.id')
         .onDelete('CASCADE');
-      table.integer('tag').notNullable().references('tags.id')
+      table.integer('tag_id').notNullable().references('tags.id')
         .onDelete('CASCADE');
-      table.unique(['tag', 'article']);
+      table.unique(['tag_id', 'article_id']);
       table.timestamps(true, true);
     });
 };
@@ -73,7 +73,7 @@ exports.down = function(knex, Promise) {
     .dropTableIfExists('articles')
     .dropTableIfExists('comments')
     .dropTableIfExists('favorites')
-    .dropTableIfExists('folowers')
+    .dropTableIfExists('followers')
     .dropTableIfExists('tags')
     .dropTableIfExists('articles_tags');
 };
