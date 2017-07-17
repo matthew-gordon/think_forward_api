@@ -28,14 +28,17 @@ async function bySlug(req, res, next) {
     .first('username', 'bio', 'image', 'id')
     .where({id: article.author});
 
+  article.author = author;
+
   req.params.article = article;
   req.params.author = author;
   req.params.tagList = tagList;
   req.params.tagRelations = tagsRelations;
 
+  delete req.params.author.id;
+  
   await next();
 
-  delete req.params.author.id;
 }
 
 async function getOne(req, res, next) {
