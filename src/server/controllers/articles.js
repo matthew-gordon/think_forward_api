@@ -1,7 +1,7 @@
 const knex = require('../db/knex');
 const queries = require('../db/queries/article_queries');
 
-async function bySlug (req, res, next) {
+async function bySlug(req, res, next) {
 
   const article = await knex('articles')
     .first()
@@ -33,15 +33,17 @@ async function bySlug (req, res, next) {
   req.params.tagList = tagList;
   req.params.tagRelations = tagsRelations;
 
-  await next()
+  await next();
 
-  console.log(req.params);
   delete req.params.author.id;
 }
 
-const getOne = (req, res, next) => {
-
-};
+async function getOne(req, res, next) {
+  // console.log(req.params.article, '**** see this ***');
+  console.log(req.params, '***** THIS IS NOW!!! ****');
+  res.send(req.params.article);
+  // req.body.article = req.params.article;
+}
 
 module.exports = {
   bySlug,
