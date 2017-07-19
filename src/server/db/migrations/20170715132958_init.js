@@ -23,12 +23,14 @@ exports.up = function(knex, Promise) {
       table.timestamps(true, true);
     })
 
-    .createTable('comments', (table) => {
+    .createTable('comments', function (table) {
       table.increments();
-      table.text('body').notNullable();
-      table.integer('author').notNullable().references('articles.id')
-        .onDelete('CASCADE');
-      table.timestamps(true, true);
+      table.text('body').notNullable()
+      table.integer('author').notNullable().references('users.id')
+        .onDelete('CASCADE')
+      table.integer('article').notNullable().references('articles.id')
+        .onDelete('CASCADE')
+      table.timestamps(true, true)
     })
 
     .createTable('favorites', (table) => {
