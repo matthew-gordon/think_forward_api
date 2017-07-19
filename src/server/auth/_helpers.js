@@ -44,7 +44,7 @@ function ensureAuthenticated(req, res, next) {
       .then((user) => {
         return res.status(200).json({
           status: 'success',
-          user: user
+          user
         });
       })
       .catch((err) => {

@@ -28,7 +28,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/auth', auth);
 app.use('/articles', articles);
-app.use('/tags', tags);
+// app.use('/profiles', profiles);
+app.use('/', tags);
 
 // app.use('*', (req, res, next) => {
 //   res.send('Hmmm... that doesn\'t seem to be here...');
