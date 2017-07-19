@@ -10,7 +10,7 @@ async function bySlug(req, res, next) {
 
   const { user } = res.locals;
 
-  console.log(res.locals);
+  // console.log(res.locals);
   if (!req.params.slug) {
     res.status(404).send({
       status: 'error',
@@ -34,7 +34,6 @@ async function bySlug(req, res, next) {
 
   let tagList = [];
 
-  console.log(tagsRelations);
   if (tagsRelations && tagsRelations.length > 0) {
     tagList = await knex('tags')
       .select()
@@ -150,10 +149,6 @@ async function get(req, res, next) {
   ];
   let limit = 10;
   let offset = 10;
-  // let favorited;
-  // let author;
-  // let tag;
-
   const { author, tag, favorited} = res.locals;
 
   // Get all articles
@@ -239,11 +234,10 @@ async function get(req, res, next) {
   let articlesCount = countRes.count || conutRes['count(*)'];
   articlesCount = Number(articlesCount);
 
-  res.locals.articles = articles;
-
   res.status(200).json({
     status: 'success',
-    articles: res.locals.articles
+    articles_count: articlesCount,
+    articles
   });
 }
 
@@ -253,11 +247,38 @@ function getSelect(table, prefix, fields) {
 }
 
 async function getOne(req, res, next) {
-  res.status(200).send(res.locals.article);
+  // res.body = {article: res.locals.article};
+  res.status(200).send(res.locals.article)
+}
+
+async function del(req, res, next) {
+  const userId = res.locals.user.id;
+  const article = res.locals.article;
+  // if (article.author.id !== userId) {
+  //   res.status(403).json({
+  //     status: 'error',
+  //     message: 'Not owned by user.'
+  //   });
+  // }
+
+  await Promise.all([
+    knex('favorites')
+      .del()
+      .where({ user: userId, article: article.id }),
+    knex('articles_tags')
+      .del()
+      .where({id: article.id}),
+    knex('articles')
+      .del()
+      .where({id: article.id})
+  ])
+
+  res.status(200).json({ status: 'success', message: 'Article deleted.' });
 }
 
 module.exports = {
   bySlug,
   get,
-  getOne
+  getOne,
+  del
 }
