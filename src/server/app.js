@@ -6,7 +6,6 @@ const port = process.env.PORT || 3000;
 
 const auth = require('./routes/auth');
 const articles = require('./routes/articles');
-const tags = require('./routes/tags');
 
 require('dotenv').config();
 
@@ -27,8 +26,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/auth', auth);
-app.use('/articles', articles);
-app.use('/tags', tags);
+app.use('/', articles);
 
 // app.use('*', (req, res, next) => {
 //   res.send('Hmmm... that doesn\'t seem to be here...');

@@ -631,6 +631,12 @@ joi@^6.10.1:
     moment "2.x.x"
     topo "1.x.x"
 
+join-js@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/join-js/-/join-js-0.4.1.tgz#13032c10c4cfdfcb30a061d8933b7039266931e3"
+  dependencies:
+    lodash "^4.13.1"
+
 json3@3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.2.tgz#3c0434743df93e2f5c42aee7b19bcb483575f4e1"
@@ -758,7 +764,7 @@ lodash.once@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.once/-/lodash.once-4.1.1.tgz#0dd3971213c7c56df880977d504c88fb471a97ac"
 
-lodash@^4.6.0:
+lodash@^4.13.1, lodash@^4.6.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 

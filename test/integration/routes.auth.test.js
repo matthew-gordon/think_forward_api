@@ -71,7 +71,7 @@ describe('routes : auth', () => {
         done();
       });
     });
-    xit('should throw an error if password incorrect', (done) => {
+    it('should throw an error if password incorrect', (done) => {
       chai.request(server)
       .post('/auth/login')
       .send({
